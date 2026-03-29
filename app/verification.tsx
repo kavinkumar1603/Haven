@@ -140,7 +140,7 @@ export default function VerificationScreen() {
             <Button 
               title="Verify My ID" 
               variant="secondary"
-              onPress={() => {}}
+              onPress={() => router.push('/verified-success')}
               style={styles.verifyButton}
             />
 

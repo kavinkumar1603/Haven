@@ -17,6 +17,7 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="verification" options={{ headerShown: false, animation: 'slide_from_right' }} />
+        <Stack.Screen name="verified-success" options={{ headerShown: false, animation: 'fade' }} />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
