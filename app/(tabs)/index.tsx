@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons, FontAwesome6 } from '@expo/vector-icons';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
+import { router } from 'expo-router';
 
 import { BrandColors } from '@/constants/theme';
 import { Button } from '@/components/ui/button';
@@ -93,7 +94,7 @@ export default function HomeScreen() {
               title="Get Started" 
               variant="secondary"
               rightIcon={<Ionicons name="arrow-forward" size={18} color="white" />}
-              onPress={() => {}}
+              onPress={() => router.push('/verification')}
               style={styles.ctaButton}
             />
 
