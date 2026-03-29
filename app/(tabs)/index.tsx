@@ -1,27 +1,31 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions, Platform } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Ionicons, FontAwesome6, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome6 } from '@expo/vector-icons';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 
-const { width, height } = Dimensions.get('window');
+import { BrandColors } from '@/constants/theme';
+import { Button } from '@/components/ui/button';
+import { Typography } from '@/components/ui/typography';
+import { FeatureItem } from '@/components/common/feature-item';
+
+const { height } = Dimensions.get('window');
 
 /**
  * HomeScreen component displaying the GigShield welcome page.
- * Designed to match the user-uploaded image with high-fidelity styles.
+ * Refactored to use a clean, professional architecture.
  */
 export default function HomeScreen() {
   const insets = useSafeAreaInsets();
 
   return (
     <View style={styles.container}>
-      {/* Light status bar for the dark blue background */}
       <StatusBar style="light" translucent />
       
-      {/* Deep Blue Gradient covering the top portion */}
+      {/* Deep Blue Header Background */}
       <LinearGradient
-        colors={['#004771', '#00253B']}
+        colors={[BrandColors.primary, BrandColors.primaryDark]}
         style={[styles.gradientBackground, { height: height * 0.5 }]}
       />
 
@@ -31,20 +35,25 @@ export default function HomeScreen() {
           showsVerticalScrollIndicator={false}
           bounces={false}
         >
-          {/* Brand/Header Section */}
+          {/* Header Branding */}
           <View style={styles.headerContainer}>
             <View style={styles.logoOuterCircle}>
               <View style={styles.logoInnerCircle}>
-                 <Ionicons name="shield" size={32} color="white" />
+                 <Ionicons name="shield" size={32} color={BrandColors.text.white} />
               </View>
             </View>
-            <Text style={styles.brandTitle}>GigShield</Text>
-            <Text style={styles.brandSubtitle}>
+            <Typography variant="h1" color={BrandColors.text.white}>GigShield</Typography>
+            <Typography 
+              variant="body" 
+              color={BrandColors.text.light} 
+              align="center"
+              style={styles.brandSubtitle}
+            >
               Income Protection for Delivery{'\n'}Partners
-            </Text>
+            </Typography>
           </View>
 
-          {/* Main Card Section - Starts below the brand and fills the bottom */}
+          {/* Main Card Section */}
           <View style={[
             styles.mainCard, 
             { 
@@ -52,69 +61,56 @@ export default function HomeScreen() {
               minHeight: height * 0.55
             }
           ]}>
-            <Text style={styles.welcomeText}>Welcome</Text>
-            <Text style={styles.mainDescription}>
+            <Typography variant="h2">Welcome</Typography>
+            <Typography variant="body" style={styles.mainDescription}>
               GigShield provides seamless income protection tailored for delivery partners. Secure your earnings today.
-            </Text>
+            </Typography>
 
-            {/* List of Key Features */}
+            {/* Features Listing */}
             <View style={styles.featuresList}>
-              {/* Feature Item 1 */}
-              <View style={styles.featureItem}>
-                <View style={[styles.iconContainer, { backgroundColor: '#E0F2FF' }]}>
-                  <Ionicons name="shield-checkmark-outline" size={24} color="#005B9E" />
-                </View>
-                <View style={styles.featureTextWrapper}>
-                  <Text style={styles.featureTitle}>Verified Partner Only</Text>
-                  <Text style={styles.featureSubtitle}>Only registered delivery workers can enroll</Text>
-                </View>
-              </View>
-
-              {/* Feature Item 2 */}
-              <View style={styles.featureItem}>
-                <View style={[styles.iconContainer, { backgroundColor: '#FFF2E6' }]}>
-                  <FontAwesome6 name="indian-rupee-sign" size={20} color="#FF761E" />
-                </View>
-                <View style={styles.featureTextWrapper}>
-                  <Text style={styles.featureTitle}>Instant Payouts</Text>
-                  <Text style={styles.featureSubtitle}>Claims paid directly to your UPI account</Text>
-                </View>
-              </View>
-
-              {/* Feature Item 3 */}
-              <View style={styles.featureItem}>
-                <View style={[styles.iconContainer, { backgroundColor: '#E8F1FF' }]}>
-                  <Ionicons name="time-outline" size={24} color="#3B82F6" />
-                </View>
-                <View style={styles.featureTextWrapper}>
-                  <Text style={styles.featureTitle}>Auto-Claim</Text>
-                  <Text style={styles.featureSubtitle}>No paperwork — triggers fire automatically</Text>
-                </View>
-              </View>
+              <FeatureItem 
+                icon={<Ionicons name="shield-checkmark-outline" size={24} color={BrandColors.accent} />}
+                iconBg="#E0F2FF"
+                title="Verified Partner Only"
+                subtitle="Only registered delivery workers can enroll"
+              />
+              <FeatureItem 
+                icon={<FontAwesome6 name="indian-rupee-sign" size={20} color={BrandColors.secondary} />}
+                iconBg="#FFF2E6"
+                title="Instant Payouts"
+                subtitle="Claims paid directly to your UPI account"
+              />
+              <FeatureItem 
+                icon={<Ionicons name="time-outline" size={24} color="#3B82F6" />}
+                iconBg="#E8F1FF"
+                title="Auto-Claim"
+                subtitle="No paperwork — triggers fire automatically"
+              />
             </View>
 
-            {/* Primary Action Button */}
-            <TouchableOpacity 
-              style={styles.ctaButton} 
-              activeOpacity={0.85}
+            {/* Main Action Call */}
+            <Button 
+              title="Get Started" 
+              variant="secondary"
+              rightIcon={<Ionicons name="arrow-forward" size={18} color="white" />}
               onPress={() => {}}
-            >
-              <Text style={styles.ctaButtonText}>Get Started</Text>
-              <Ionicons name="arrow-forward" size={18} color="white" style={styles.ctaIcon} />
-            </TouchableOpacity>
+              style={styles.ctaButton}
+            />
 
-            {/* Authentication Link */}
+            {/* Auth Link */}
             <View style={styles.signInWrapper}>
-              <Text style={styles.alreadyEnrolledLabel}>Already enrolled? </Text>
+              <Typography variant="caption" color={BrandColors.text.secondary}>Already enrolled? </Typography>
               <TouchableOpacity onPress={() => {}}>
-                <Text style={styles.signInLink}>Sign In</Text>
+                <Typography variant="caption" color={BrandColors.accent} style={{ fontWeight: '700' }}>Sign In</Typography>
               </TouchableOpacity>
             </View>
 
-            {/* Security/Trust Footer */}
+            {/* Security Footer */}
             <View style={styles.securityFooter}>
-              <Ionicons name="lock-closed" size={12} color="#94A3B8" />
-              <Text style={styles.securityText}>Your data is protected and never shared</Text>
+              <Ionicons name="lock-closed" size={12} color={BrandColors.text.muted} />
+              <Typography variant="caption" style={styles.securityText}>
+                Your data is protected and never shared
+              </Typography>
             </View>
           </View>
         </ScrollView>
@@ -126,7 +122,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: BrandColors.background,
   },
   gradientBackground: {
     position: 'absolute',
@@ -165,113 +161,43 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.25)',
   },
-  brandTitle: {
-    fontSize: 28,
-    fontWeight: '800',
-    color: '#FFFFFF',
-    letterSpacing: -0.5,
-  },
   brandSubtitle: {
-    fontSize: 16,
-    color: '#E2E8F0',
-    textAlign: 'center',
     marginTop: 8,
     lineHeight: 22,
     fontWeight: '500',
   },
   mainCard: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: BrandColors.ui.card,
     borderTopLeftRadius: 36,
     borderTopRightRadius: 36,
     paddingHorizontal: 28,
     paddingTop: 36,
-    shadowColor: '#000',
+    shadowColor: BrandColors.ui.shadow,
     shadowOffset: { width: 0, height: -12 },
     shadowOpacity: 0.1,
     shadowRadius: 16,
     elevation: 24,
   },
-  welcomeText: {
-    fontSize: 26,
-    fontWeight: '800',
-    color: '#0F172A',
-    marginBottom: 12,
-  },
   mainDescription: {
-    fontSize: 15,
-    color: '#64748B',
-    lineHeight: 23,
     marginBottom: 32,
-    fontWeight: '400',
   },
   featuresList: {
     gap: 24,
     marginBottom: 40,
   },
-  featureItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  iconContainer: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  featureTextWrapper: {
-    marginLeft: 16,
-    flex: 1,
-  },
-  featureTitle: {
-    fontSize: 16,
-    fontWeight: '700',
-    color: '#0F172A',
-    marginBottom: 2,
-  },
-  featureSubtitle: {
-    fontSize: 13,
-    color: '#94A3B8',
-    fontWeight: '500',
-  },
   ctaButton: {
-    backgroundColor: '#FF761E',
-    height: 58,
-    borderRadius: 14,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#FF761E',
+    shadowColor: BrandColors.secondary,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 8,
     elevation: 4,
-  },
-  ctaButtonText: {
-    color: '#FFFFFF',
-    fontSize: 17,
-    fontWeight: '700',
-    letterSpacing: 0.2,
-  },
-  ctaIcon: {
-    marginLeft: 8,
   },
   signInWrapper: {
     flexDirection: 'row',
     justifyContent: 'center',
     marginTop: 20,
     marginBottom: 32,
-  },
-  alreadyEnrolledLabel: {
-    fontSize: 14,
-    color: '#64748B',
-    fontWeight: '500',
-  },
-  signInLink: {
-    fontSize: 14,
-    color: '#005B9E',
-    fontWeight: '700',
   },
   securityFooter: {
     flexDirection: 'row',
@@ -280,10 +206,7 @@ const styles = StyleSheet.create({
     marginTop: 'auto',
   },
   securityText: {
-    fontSize: 11,
-    color: '#94A3B8',
     marginLeft: 6,
-    fontWeight: '500',
     letterSpacing: 0.1,
   },
 });
