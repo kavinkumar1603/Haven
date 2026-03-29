@@ -141,7 +141,7 @@ export default function VerifiedSuccessScreen() {
               <Button 
                 title="Continue to DigiLocker" 
                 variant="secondary"
-                onPress={() => {}}
+                onPress={() => router.push('/digilocker')}
                 style={styles.continueButton}
               />
               <Typography variant="caption" color={BrandColors.text.muted} align="center" style={styles.autoContinueText}>
