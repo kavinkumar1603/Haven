@@ -19,6 +19,8 @@ export default function RootLayout() {
         <Stack.Screen name="verification" options={{ headerShown: false, animation: 'slide_from_right' }} />
         <Stack.Screen name="verified-success" options={{ headerShown: false, animation: 'fade' }} />
         <Stack.Screen name="digilocker" options={{ headerShown: false, animation: 'slide_from_right' }} />
+        <Stack.Screen name="otp" options={{ headerShown: false, animation: 'slide_from_bottom' }} />
+        <Stack.Screen name="documents-preview" options={{ headerShown: false, animation: 'slide_from_right' }} />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>

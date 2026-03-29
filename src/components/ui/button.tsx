@@ -6,7 +6,8 @@ import {
   TouchableOpacityProps, 
   ViewStyle, 
   TextStyle, 
-  ActivityIndicator 
+  ActivityIndicator,
+  StyleProp
 } from 'react-native';
 import { BrandColors } from '@/constants/theme';
 
@@ -16,8 +17,8 @@ interface ButtonProps extends TouchableOpacityProps {
   loading?: boolean;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
-  style?: ViewStyle;
-  textStyle?: TextStyle;
+  style?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
 }
 
 export const Button: React.FC<ButtonProps> = ({ 

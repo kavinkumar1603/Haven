@@ -1,12 +1,11 @@
-import React from 'react';
-import { Text, TextProps, StyleSheet, TextStyle } from 'react-native';
+import { Text, TextProps, StyleSheet, TextStyle, StyleProp } from 'react-native';
 import { BrandColors } from '@/constants/theme';
 
 interface TypographyProps extends TextProps {
   variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'body' | 'bodySemiBold' | 'caption' | 'link';
   color?: string;
   align?: 'left' | 'center' | 'right';
-  style?: TextStyle;
+  style?: StyleProp<TextStyle>;
 }
 
 export const Typography: React.FC<TypographyProps> = ({ 
@@ -18,12 +17,13 @@ export const Typography: React.FC<TypographyProps> = ({
   ...props 
 }) => {
   const variantStyles = styles[variant] || styles.body;
-  const combinedStyles: TextStyle = {
-    ...variantStyles,
-    textAlign: align,
-    color: color || variantStyles.color,
-    ...style,
-  };
+  
+  const combinedStyles = [
+    variantStyles,
+    { textAlign: align },
+    color ? { color } : null,
+    style,
+  ];
 
   return (
     <Text style={combinedStyles} {...props}>

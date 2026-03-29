@@ -157,7 +157,7 @@ export default function DigiLockerScreen() {
             <Button 
               title="Send OTP via SMS" 
               variant="primary"
-              onPress={() => {}}
+              onPress={() => router.push('/otp')}
               style={styles.otpButton}
               leftIcon={<Ionicons name="chatbox-ellipses-outline" size={20} color="white" style={{ marginRight: 8 }} />}
             />
